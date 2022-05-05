@@ -48,6 +48,10 @@ class InstagramExampleViewController: ButtonBarPagerTabStripViewController {
             oldCell?.label.textColor = .black
             newCell?.label.textColor = self?.blueInstagramColor
         }
+        
+        self.didSelectButtonIndex = { [weak self] index in
+            print(index)
+        }
         super.viewDidLoad()
     }
 

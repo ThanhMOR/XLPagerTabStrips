@@ -73,6 +73,8 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     public var changeCurrentIndex: ((_ oldCell: ButtonBarViewCell?, _ newCell: ButtonBarViewCell?, _ animated: Bool) -> Void)?
     public var changeCurrentIndexProgressive: ((_ oldCell: ButtonBarViewCell?, _ newCell: ButtonBarViewCell?, _ progressPercentage: CGFloat, _ changeCurrentIndex: Bool, _ animated: Bool) -> Void)?
 
+    public var didSelectButtonIndex: ((Int) -> Void)?
+    
     @IBOutlet public weak var buttonBarView: ButtonBarView!
 
     lazy private var cachedCellWidths: [CGFloat]? = { [unowned self] in
@@ -277,6 +279,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     }
 
     open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.didSelectButtonIndex?(indexPath.item)
         guard indexPath.item != currentIndex else { return }
 
         buttonBarView.moveTo(index: indexPath.item, animated: true, swipeDirection: .none, pagerScroll: .yes)
